@@ -1,0 +1,12 @@
+{"_id":{"$oid":"60fc5065e3f820919721b8c4"},"name":"nehav ","contact_number":"9833910534","address":"mumbai","salary":30000.0,"employee_id":98821.0,"role":"manager"}
+{"_id":{"$oid":"60fc5065e3f820919721b8c5"},"name":"mina ","contact_number":"9833910535","address":"thane","salary":32000.0,"employee_id":98823.0,"role":"sales"}
+{"_id":{"$oid":"60fc5065e3f820919721b8c6"},"name":"pankaj ","contact_number":"9833910536","address":"bhopal","salary":40000.0,"employee_id":98824.0,"role":"hr"}
+{"_id":{"$oid":"60fc5065e3f820919721b8c7"},"name":"mareena ","contact_number":"9833910537","address":"meerut","salary":45000.0,"employee_id":98825.0,"role":"support"}
+{"_id":{"$oid":"60fc5065e3f820919721b8c8"},"name":"pooja","contact_number":"9833910538","address":"delhi","salary":50000.0,"employee_id":98826.0,"role":"developer"}
+{"_id":{"$oid":"60fc5065e3f820919721b8c9"},"name":"namita","contact_number":"9833910539","address":"surat","salary":52000.0,"employee_id":98820.0,"role":"sales"}
+{"_id":{"$oid":"60fc5065e3f820919721b8ca"},"name":"sneha ","contact_number":"9833910510","address":"baroda","salary":55000.0,"employee_id":98827.0,"role":"support"}
+{"_id":{"$oid":"60fc5065e3f820919721b8cb"},"name":"anjali ","contact_number":"9833910511","address":"ahmedabad","salary":60000.0,"employee_id":98828.0,"role":"tester"}
+{"_id":{"$oid":"60fc5065e3f820919721b8cc"},"name":"harsha ","contact_number":"9833910512","address":"mumbai","salary":20000.0,"employee_id":98829.0,"role":"operations"}
+{"_id":{"$oid":"60fc5065e3f820919721b8cd"},"name":"varun ","contact_number":"9833910512","address":"mehsana","salary":56000.0,"employee_id":98831.0,"role":"tester"}
+{"_id":{"$oid":"60fc5065e3f820919721b8ce"},"name":"preeti ","contact_number":"9833910513","address":"noida","salary":87000.0,"employee_id":98832.0,"role":"developer"}
+{"_id":{"$oid":"60fc5065e3f820919721b8cf"},"name":"madhu","contact_number":"9833910525","address":"bangalore","salary":22000.0,"employee_id":98833.0,"role":"sales"}

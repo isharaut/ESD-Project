@@ -1,0 +1,19 @@
+----------
+Node.js
+----------
+FILE: index.js
+
+console.log("hello world");
+
+----FILE END-----
+
+$ node index.js OR node .
+$ nodemon index.js OR nodemon .
+
+
+. dot will execute index.js file
+if you want to open specific file then run
+node file_name.js
+nodemon file_name.js
+
+nodemon will automatically reload when you made any changes in file where node will need to run again and again if you made any changes in file

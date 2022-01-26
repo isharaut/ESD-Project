@@ -1,0 +1,176 @@
+AGENDA
+------
+Deploy Node.js app on Heroku
+
+Mongoose Module
+CRUDL Operations using Node.js
+MongoDB Atlas Cluster
+
+=============================
+IF YOU FACE ANY ISSUE LIKE 
+Error: Cannot find module 'module_name'
+
+THEN RUN FOLLOWING COMMAND
+npm install <module_name>
+OR
+npm i <module_name>
+=============================
+
+------------------------------------
+CRUD OPERATION USING Mongoose Module
+------------------------------------
+File: user_module.js
+
+//import mongoose library to make connection with mongodb
+var mongoose = require("mongoose");
+
+//syntax: mongodb://host:port/database
+var conn_string = "mongodb://127.0.0.1:27017/cia";
+
+//create connection
+mongoose.connect(conn_string, { useNewUrlParser: true, useUnifiedTopology: true });
+
+//create schema this will require to perform CRUD operations
+const userSchema = new mongoose.Schema({
+	name: String,
+	age: Number,
+	city: String
+});
+
+//create collection model
+const UserModel = new mongoose.model("users", userSchema);
+
+exports.User = UserModel;
+
+--------------------------
+File: index.js
+--------------------------
+
+var express = require("express");
+var app = express();
+const port = 8088;
+
+var user_module = require("./user_module");
+const user = user_module.User;
+
+//to parse raw json use express.json middleware
+app.use(express.json());
+
+//read all documents from collection
+app.route("/user")
+.get(async (req, res) => {
+	let data = await user.find();
+	res.send(data);
+});
+
+app.listen(port, () => console.log(`Listening on port ${port}`));
+
+
+
+-------------------------------
+NOTE: promise (i.e. async and await) need to use because data is coming from external resource and not from node.js
+-------------------------------
+
+All CRUD Operations
+-------------------
+app.route("/user")
+.get(async (req, res) => {
+	
+	let data = await user.find();
+	res.send(data);
+})
+.post(async (req, res) => {
+	
+	let u = new user(req.body);
+	let result = await u.save();
+	res.send(result);
+	
+}).put(async (req, res) => {
+	
+	let u_data = await user.updateOne({ "_id" : req.body._id }, {
+		"$set" : {
+			"name": req.body.name,
+			"age": req.body.age,
+			"city": req.body.city,
+		}
+	});
+	res.send(u_data);
+	
+}).delete(async (req, res) => {
+	
+	let d_data = await user.deleteOne({_id: req.query._id });
+	res.send(d_data);
+	
+});
+
+-------------------------------
+__v => versionKey
+The versionKey is a property set on each document when first created by Mongoose. This keys value contains the internal revision of the document. The name of this document property is configurable. The default is __v.
+
+-------------------------------
+
+Final index.js code
+
+var express = require("express");
+var app = express();
+const port = 8088;
+
+var user_module = require("./user");
+const user = user_module.User;
+
+//to parse raw json use express.json middleware
+app.use(express.json());
+
+app.route("/user")
+.get(async (req, res) => {
+	
+	let data = await user.find();
+	res.send(data);
+})
+.post(async (req, res) => {
+	
+	let u = new user(req.body);
+	let result = await u.save();
+	res.send(result);
+	
+})
+.put(async (req, res) => {
+	
+	//syntax collection.updateOne(query, set);
+	let u_data = await user.updateOne({
+		"_id" : req.body.id
+	}, 
+	{
+		"$set" : {
+			"name": req.body.name,
+			"age": req.body.age,
+			"city": req.body.city,
+		}
+	});
+	res.send(u_data);
+	
+})
+.delete(async (req, res) => {
+	
+	let data = await user.deleteOne({_id: req.query._id });
+	res.send(data);
+});
+
+app.listen(port, () => console.log(`Listening on port ${port}`));
+
+-----------------------------------
+Class Work:
+Give Class Work to create Students Schema name, age, city, roll_no
+And write REST API to perform CRUD operation on same
+-----------------------------------
+	10 mins Short Break
+-----------------------------------
+
+Create MongoDB Cluster on Atlas
+
+-----------------------------------
+DEPLOYMENT OF Node.js App on Heroku
+-----------------------------------
+
+https://codeinsightacademy.com/blog/javascript/deploy-node-js-app-on-heroku/
+

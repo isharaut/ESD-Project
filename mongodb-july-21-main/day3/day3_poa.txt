@@ -1,0 +1,276 @@
+AGENDA
+------
+Deploye Node.js app on Heroku
+
+Node.js
+Node.js Module
+Express.js
+
+Mongoose Module
+CRUDL Operations using Node.js
+MongoDB Atlas Cluster
+
+=============================
+IF YOU FACE ANY ISSUE LIKE 
+Error: Cannot find module 'module_name'
+
+THEN RUN FOLLOWING COMMAND
+npm install <module_name>
+OR
+npm i <module_name>
+=============================
+
+
+----------
+Node.js
+----------
+index.js
+console.log("hello world");
+$ node index.js OR node .
+$ nodemon index.js OR nodemon .
+. dot will execute index.js file
+if you want to open specific file then run
+node file_name.js
+nodemon file_name.js
+
+nodemon will automatically reload when you made any changes in file where node will need to run again and again if you made any changes in file
+
+--------------
+Node.js module
+--------------
+mymodule.js
+
+exports.add = (x, y) => {
+	return x + y;
+}
+
+index.js
+var calc = require("./mymodule");
+
+console.log(calc.add(5,6));
+
+
+Give class work to add sub mul and div functions in mymodule.js
+
+-------------
+Express JS
+Why Express JS
+-------------
+index.js
+
+var express = require("express");
+var app = express();
+const port = 8088;
+
+app.get("/", (req, res) => {
+	res.send("get method");
+});
+
+app.post("/", (req, res) => {
+	res.send("post method");
+});
+
+//similarly you can use put and delete
+
+
+/** using route function you just need to write url once */
+app.route("/user")
+.get((req, res) => {
+	res.send("get");
+})
+.post((req, res) => {
+	res.send("post");
+})
+.put((req, res) => {
+	res.send("put");
+})
+.delete((req, res) => {
+	res.send("delete")
+});
+
+app.listen(port, () => console.log(`Listening on port ${port}`));
+
+-----------------
+	READ DATA
+-----------------
+var express = require("express");
+var app = express();
+const port = 8088;
+
+var bodyParser = require('body-parser');
+// for parsing application/json
+app.use(bodyParser.json()); 
+
+// for parsing application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: true }));
+
+app.route("/user")
+.get((req, res) => {
+	//read query string 
+	console.log(req.query);
+	res.send(req.query);
+})
+.post((req, res) => {
+	//read form data
+	console.log(req.body);
+	res.send(req.body);
+});
+
+app.listen(port, () => console.log(`Listening on port ${port}`));
+
+Class work read 2 number and find add using get and subtraction using post method
+get should access querystring parameters and post will access x-www-form-urlencoded
+
+--------------------------
+	READ RAW JSON DATA
+--------------------------
+var express = require("express");
+var app = express();
+const port = 8088;
+
+//to parse raw json use express.json middleware
+app.use(express.json());
+
+app.route("/user")
+.post((req, res) => {
+	//read form data
+	console.log(req.body);
+	res.send(req.body);
+});
+
+
+app.listen(port, () => console.log(`Listening on port ${port}`));
+
+Class work multiply 2 numbers using raw json
+
+------------------------------------
+CRUD OPERATION USING Mongoose Module
+------------------------------------
+File: user_module.js
+
+var mongoose = require("mongoose");
+
+var conn_string = "mongodb://127.0.0.1:27017/cia";
+
+mongoose.connect(conn_string, { useNewUrlParser: true, useUnifiedTopology: true });
+
+//create schema this will require to perform CRUD operations
+const userSchema = new mongoose.Schema({
+	name: String,
+	age: Number,
+	city: String
+});
+
+//create collection model
+const UserModel = new mongoose.model("users", userSchema);
+
+exports.User = UserModel;
+
+--------------------------
+File: index.js
+
+var express = require("express");
+var app = express();
+const port = 8088;
+
+var user_module = require("./user_module");
+const user = user_module.User;
+
+//to parse raw json use express.json middleware
+app.use(express.json());
+
+app.route("/user")
+.get(async (req, res) => {
+	let data = await user.find();
+	res.send(data);
+});
+
+app.listen(port, () => console.log(`Listening on port ${port}`));
+
+NOTE: promise (i.e. async and await) need to use because data is coming from external resource and not from node.js
+
+-------------------------------
+
+app.route("/user")
+.get(async (req, res) => {
+	
+	let data = await user.find();
+	res.send(data);
+})
+.post(async (req, res) => {
+	
+	let u = new user(req.body);
+	let result = await u.save();
+	res.send(result);
+	
+}).put(async (req, res) => {
+	
+	let u_data = await user.updateOne({ "_id" : req.body._id }, {
+		"$set" : {
+			"name": req.body.name,
+			"age": req.body.age,
+			"city": req.body.city,
+		}
+	});
+	res.send(u_data);
+	
+}).delete(async (req, res) => {
+	
+	let d_data = await user.deleteOne({_id: req.query.id });
+	res.send(d_data);
+	
+});
+
+-------------------------------
+__v => versionKey
+The versionKey is a property set on each document when first created by Mongoose. This keys value contains the internal revision of the document. The name of this document property is configurable. The default is __v.
+
+-------------------------------
+End of session
+-------------------------------
+
+Final index.js code
+
+var express = require("express");
+var app = express();
+const port = 8088;
+
+var user_module = require("./user");
+const user = user_module.User;
+
+//to parse raw json use express.json middleware
+app.use(express.json());
+
+app.route("/user")
+.get(async (req, res) => {
+	
+	let data = await user.find();
+	res.send(data);
+})
+.post(async (req, res) => {
+	
+	let u = new user(req.body);
+	let result = await u.save();
+	res.send(result);
+	
+}).put(async (req, res) => {
+	
+	let u_data = await user.updateOne({
+		"_id" : req.body._id
+	}, 
+	{
+		"$set" : {
+			"name": req.body.name,
+			"age": req.body.age,
+			"city": req.body.city,
+		}
+	});
+	res.send(u_data);
+	
+}).delete(async (req, res) => {
+	
+	let data = await user.deleteOne({_id: req.query.id });
+	res.send(data);
+});
+
+app.listen(port, () => console.log(`Listening on port ${port}`));

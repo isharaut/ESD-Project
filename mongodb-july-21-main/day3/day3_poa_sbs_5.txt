@@ -1,0 +1,65 @@
+------------------------------------
+CRUD OPERATION USING Mongoose Module
+------------------------------------
+File: user_module.js
+
+//import mongoose module (it's like a driver which connects to mongodb from node)
+var mongoose = require("mongoose");
+
+//create connection string which containse host port and database name
+var conn_string = "mongodb://127.0.0.1:27017/cia";
+
+//connect to database
+mongoose.connect(conn_string, { useNewUrlParser: true, useUnifiedTopology: true });
+
+//create schema this will require to perform CRUD operations
+const userSchema = new mongoose.Schema({
+	name: String,
+	age: Number,
+	city: String
+});
+
+
+//create collection model - where users is collection name from mongodb database
+const UserModel = new mongoose.model("users", userSchema);
+
+
+//export UserModel so that in other pages we can import the same
+exports.User = UserModel;
+
+-----------END OF user_module.js FILE --------------
+
+--------------------------
+File: index.js
+
+var express = require("express");
+var app = express();
+const port = 8088;
+
+//import user_module which was created earler .js is not required while importing module
+var user_module = require("./user_module");
+const user = user_module.User;
+
+//to parse raw json use express.json middleware
+app.use(express.json());
+
+//api to fetch all data from users collection and return to client in JSON format
+app.route("/user")
+.get(async (req, res) => {
+	let data = await user.find();
+	res.send(data);
+});
+
+app.listen(port, () => console.log(`Listening on port ${port}`));
+
+-------------END OF index.js FILE----------
+
+TO RUN THIS API HIT IN POSTMAN AND SELECT METHOD GET
+http://localhost:8088/user
+
+
+
+-------------------------------
+NOTE: promise (i.e. async and await) need to use because data is coming from external resource and not from node.js
+so node js halt the execution of further lines till it get response from mongodb
+-------------------------------

@@ -1,0 +1,52 @@
+1. Create Database
+Create Database and Collection in MongoDB Atlas - Done
+Create new project directory for nodejs app - Done
+
+
+2. Create Backend
+https://codeinsightacademy.com/blog/javascript/dma-project-cheat-sheet/
+Create users_module.js - Done
+Create index.js - Done
+Test App locally - Done
+
+163  node .
+164  npm i express
+165  node .
+166  npm i mongoose
+167  npm i cors
+One Line Installation of modules
+npm i express mongoose cors
+
+
+https://codeinsightacademy.com/blog/javascript/deploy-node-js-app-on-heroku/
+Login to heroku from terminal - Done
+Create package.json file - Done
+Create new heroku app - Done
+Push app to heroku - Done
+
+
+3. Create Frontend
+Create new repository in gitlab- Done
+Clone in local machine - Done
+
+Create script.js - Done
+Create index.html - Done
+Create add.html - Done
+Create edit.html - Done
+
+Push the code in gitlab
+git status
+git add .
+git commit -m 'Initial Commit'
+git push origin master
+git push origin main
+
+
+Create gitlab-ci.yml from gitlab portal
+Verify the frontend app using URL
+https://username.gitlab.io/projectname
+
+e.g. https://tcet.gitlab.io/dma
+
+Take pull in local machine 
+Make changes and push to gitlab and see CI/CD status

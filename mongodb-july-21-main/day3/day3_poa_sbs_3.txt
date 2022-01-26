@@ -1,0 +1,41 @@
+-------------
+Express JS: Express.js is a framework to create API in easy way
+-------------
+
+FILE: index.js
+
+//import express module
+var express = require("express");
+var app = express();
+
+//create port to listen request from client
+const port = 8088;
+
+/** 
+	URL Mapping syntax :-
+	app.method(url, function); 
+*/
+
+map URI with methods (URI means URL + method in this case / is url and get is method)
+app.get("/", (req, res) => {
+	res.send("get method");
+});
+
+app.post("/", (req, res) => {
+	res.send("post method");
+});
+
+
+app.listen(port, () => console.log(`Listening on port ${port}`));
+
+
+-------END OF index.js FILE-------
+
+
+
+========================================================
+TO CALL THIS API FROM POSTMAN HIT URL
+http://localhost/8088/
+
+SELECT GET or POST method in POSTMAN
+========================================================

@@ -1,0 +1,35 @@
+-------------------------------
+HOW TO CREATE MOUDLE IN NODE.js
+-------------------------------
+FILE: mymodule.js
+
+exports.add = (x, y) => {
+	return x + y;
+}
+
+---END OF mymodule.js FILE-----
+
+-------------------------------
+FILE: index.js
+
+//import your module using require and assign to local variable
+var calc = require("./mymodule");
+
+console.log(calc.add(5,6));
+
+---END OF index.js FILE-----
+
+
+Give class work to add sub, mul and div functions in mymodule.js
+
+Ans:
+
+exports.sub = (x, y) => {
+	return x - y;
+}
+exports.mul = (x, y) => {
+	return x * y;
+}
+exports.div = (x, y) => {
+	return x / y;
+}

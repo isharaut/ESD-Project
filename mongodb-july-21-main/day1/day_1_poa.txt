@@ -1,0 +1,98 @@
+DAY 1 POA
+---------
+Share download links and ask them to download and install atlease mongodb server
+---------
+MySQL Revision
+Create Db / Use Db
+INSERT Query
+SELECT Query
+---------
+3 mins short break
+---------
+Javascript revision
+addition of 2 number using var x and var y
+function creation add() and calling
+function with argument add(x,y) and calling 
+JSON
+Array of JSON
+---------
+10 mins break
+---------
+Introduction of MongoDB Wikipedia Definition
+mongod
+mongo
+show dbs
+use tcet
+db
+show collections
+db.createCollection("students")
+show collections
+db.students.find()
+var doc1 = {"name":"Missy", "age": 12, "city": "Texas"};
+db.students.createOne(doc1)
+db.students.find()
+db.students.find().pretty()
+var docs = [
+	{"name":"Tam", "age": 11, "city": "NYC"},
+	{"name":"George", "age": 16, "city": "Vegas"},
+	{"name":"Sheldon", "age": 12, "city": "California"}
+db.students.createMany(docs)
+db.students.find()
+-----------------
+3 mins break
+-----------------
+show docs of specific city
+show docs of exact age
+show docs gt or lt some age
+order by field
+limit and skip
+show docs using regex
+--------------------
+Q n A
+--------------------
+Share cheat sheet link for reference
+https://codeinsightacademy.com/blog/database/mongodb-cheat-sheet/
+---------------------------------------------------------------
+MongoDB Assignment for Practice
+---------------------------------------------------------------
+var docs = [
+{"name":"nehav ","contact_number":"9833910534","address":"mumbai","salary":30000,"employee_id":98821,"role":"manager"},
+{"name":"mina ","contact_number":"9833910535","address":"thane","salary":32000,"employee_id":98823,"role":"sales"},
+{"name":"pankaj ","contact_number":"9833910536","address":"bhopal","salary":40000,"employee_id":98824,"role":"hr"},
+{"name":"mareena ","contact_number":"9833910537","address":"meerut","salary":45000,"employee_id":98825,"role":"support"},
+{"name":"pooja","contact_number":"9833910538","address":"delhi","salary":50000,"employee_id":98826,"role":"developer"},
+{"name":"namita","contact_number":"9833910539","address":"surat","salary":52000,"employee_id":98820,"role":"sales"},
+{"name":"sneha ","contact_number":"9833910510","address":"baroda","salary":55000,"employee_id":98827,"role":"support"},
+{"name":"anjali ","contact_number":"9833910511","address":"ahmedabad","salary":60000,"employee_id":98828,"role":"tester"},
+{"name":"harsha ","contact_number":"9833910512","address":"mumbai","salary":20000,"employee_id":98829,"role":"operations"},
+{"name":"varun ","contact_number":"9833910512","address":"mehsana","salary":56000,"employee_id":98831,"role":"tester"},
+{"name":"preeti ","contact_number":"9833910513","address":"noida","salary":87000,"employee_id":98832,"role":"developer"},
+{"name":"madhu","contact_number":"9833910525","address":"bangalore","salary":22000,"employee_id":98833,"role":"sales"}
+];
+
+db.createCollection("emps");
+db.insertMany(docs);
+db.emps.find();
+==============================================
+1. show employees in descending order - salary 
+
+2. show all employees from Mumbai 
+
+3. show all employees having salary more 50000 
+
+4. show sum of salary from emps collection
+
+5. show all distinct address 
+	
+6. show names of employees having max salary 
+
+7. show employees having 2nd max salary 
+
+8. count employees from mumbai only 
+
+9. show all employees whose names starts or ends with vowels 
+
+10. show all employees whose names starts and ends with consonant
+--------------------
+Thank you 
+--------------------

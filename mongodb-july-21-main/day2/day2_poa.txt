@@ -1,0 +1,281 @@
+AGENDA
+------
+1. REVISION
+2. Operators
+3. Aggregation
+4. Update and Delete
+5. MapReduce
+
+
+=====REVISE ALL DAY1 TOPICS======
+show dbs;
+db;
+show collections;
+db.createCollection("users");
+var doc = {
+	"name": "Ajit",
+	"age": 20,
+	"city": "Mumbai"
+}
+db.users.insertOne(doc);
+
+var docs = [
+{"name":"nehav","contact_number":"9833910534","address":"mumbai","salary":30000,"employee_id":98821,"role":"manager"},
+{"name":"mina","contact_number":"9833910535","address":"thane","salary":32000,"employee_id":98823,"role":"sales"},
+{"name":"pankaj","contact_number":"9833910536","address":"bhopal","salary":40000,"employee_id":98824,"role":"hr"},
+{"name":"mareena","contact_number":"9833910537","address":"mumbai","salary":45000,"employee_id":98825,"role":"support"},
+{"name":"pooja","contact_number":"9833910538","address":"delhi","salary":50000,"employee_id":98826,"role":"developer"},
+{"name":"namita","contact_number":"9833910539","address":"bangalore","salary":52000,"employee_id":98820,"role":"sales"},
+{"name":"sneha","contact_number":"9833910510","address":"baroda","salary":55000,"employee_id":98827,"role":"support"},
+{"name":"anjali","contact_number":"9833910511","address":"ahmedabad","salary":60000,"employee_id":98828,"role":"tester"},
+{"name":"harsha","contact_number":"9833910512","address":"mumbai","salary":20000,"employee_id":98829,"role":"operations"},
+{"name":"varun","contact_number":"9833910512","address":"thane","salary":56000,"employee_id":98831,"role":"tester"},
+{"name":"preeti","contact_number":"9833910513","address":"mumbai","salary":87000,"employee_id":98832,"role":"developer"},
+{"name":"madhu","contact_number":"9833910525","address":"bangalore","salary":22000,"employee_id":98833,"role":"sales"}
+];
+
+db.users.insertMany(docs);
+
+db.users.find();
+db.users.find({query});
+db.users.find({query, project});
+db.users.find().limit(3);
+db.users.find().skip(3);
+db.users.find().skip(3).limit(5);
+db.users.count();
+db.users.find().order({"salary": 1});
+db.users.find().order({"salary": -1});
+
+> // ^ starts with
+> // $ ends
+> // [set of characters and symbols]
+> // [^ not included set of characters ]
+
+REGEX:
+9876543210
+1234567890
+
+123456
+441111
+321654
+
+ASDFG1234D
+ABCFG1234D
+
+1234 1234 4567 1234
+
+db.users.find({"name" : /a/});
+db.users.find({"name" : /^a/});
+db.users.find({"name" : /a$/});
+db.users.find({"name" : /[aeiou]$/});
+db.users.find({"name" : /[^aeiou]$/});
+
+------------------
+SHORT BREAK 5 MINS
+------------------
+===================
+	Operators
+===================
+equals = eq
+db.users.find({"address" : { "$eq" : "mumbai" }});
+
+neq
+db.users.find({"address" : { "$ne" : "mumbai" }});
+
+greater than
+db.users.find({"salary" : { "$gt" : 50000 }});
+
+less than
+db.users.find({"salary" : { "$lt" : 50000 }});
+
+in
+db.users.find({"address" : { "$in" : ["delhi", "mumbai", "pune"]}});
+
+not in
+db.users.find({"address" : { "$nin" : ["delhi", "mumbai", "pune"]}});
+
+and
+db.users.find({"$and" : [{"salary" : { "$gt" : 50000 }}, {"salary" : { "$lt" : 70000 }}]);
+
+or
+db.users.find({"$or" : [{"address" : "delhi"}, {"address" : "mumbai"}]);
+
+all documents salary between 50k and 70k
+> db.users.find({"$and" : [{"salary" : {"$gte": 50000}}, {"salary" : { "$lte" : 70000 }}]}, {_id:0, name: 1, salary: 1});
+
+===================
+	Aggregation
+===================
+
+db.users.aggregate([{
+	$group : {
+		"_id" : "kuchbhi",
+		"sum_salary" : { "$sum" : "$salary" }
+	}
+}]);
+
+db.users.aggregate([{
+	$group : {
+		"_id" : "kuchbhi",
+		"avg_salary" : { "$avg" : "$salary" }
+	}
+}]);
+
+db.users.aggregate([{
+	$group : {
+		"_id" : "kuchbhi",
+		"max_salary" : { "$max" : "$salary" }
+	}
+}]);
+
+db.users.aggregate([{
+	$group : {
+		"_id" : "kuchbhi",
+		"min_salary" : { "$min" : "$salary" }
+	}
+}]);
+
+All together
+
+db.users.aggregate([{
+	$group : {
+		"_id" : "kuchbhi",
+		"sum_salary" : { "$sum" : "$salary" },
+		"avg_salary" : { "$avg" : "$salary" },
+		"max_salary" : { "$max" : "$salary" },
+		"min_salary" : { "$min" : "$salary" }
+	}
+}]);
+
+
+db.users.aggregate([{ $group : { "_id" : "ramdayal", "MaxSal" : { "$max" : "$salary"}, "MinSal" : {"$min" : "$salary"}} }]);
+
+-------------------
+SHORT BREAK 10 MINS
+-------------------
+===================
+UPDATE AND DELETE
+===================
+updateOne
+db.users.updateOne({"name" : "nehav"}, { $set : {"name" : "neha"} });
+
+updateMany
+db.users.updateMany({"address" : "mumbai"}, { $set : {"salary" : 80000} });
+
+deleteOne
+db.users.deleteOne({"_id" : ObjectId("123456789")});
+
+deleteMany
+db.users.deleteOne({"city" : "pune"});
+
+===================
+	MAP REDUCE
+===================
+
+
+[1, 2, 3, 4, 5]
+[1, 4, 9, 16, 25]
+
+array map function in javascript
+var nums = [1, 2, 3, 4, 5];
+var sqr_of_nums = nums.map(function(x) { return x * x});
+
+
+array reduce function in javascript
+var nums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+var initial_value = 0;
+var sum_of_nums = nums.reduce(function(total, x) { return total + x}, initial_value);
+var sum_of_nums = nums.reduce(function(total, x) { return total + x}, 100);
+
+MAP doesn't change the length of the array where as reduce changes the length
+
+
+> var sqr = function(x) { return x * x; }
+> sqr(5);
+25
+> nums
+[ 1, 2, 3, 4, 5 ]
+> nums.map(sqr);
+[ 1, 4, 9, 16, 25 ]
+> var cube = function(x) { return x * x * x; }
+> nums.map(cube);
+[ 1, 8, 27, 64, 125 ]
+> var nums = [1, 3, 6, 8];
+> nums.map(x => x * x * x);
+[ 1, 27, 216, 512 ]
+>
+
+
+> var nums = [1, 2, 3, 4, 5]
+> nums.reduce(redFun);
+15
+> nums.reduce(total, x => total + x )
+uncaught exception: ReferenceError: total is not defined :
+@(shell):1:1
+> nums.reduce((total, x) => total + x )
+15
+> nums.reduce((total, x) => total * x );
+120
+
+====================
+
+db.users.distinct("address");
+
+mapReduce in MongoDB (It is similar to group by in mysql)
+mapReduce work together in MongoDB
+emitted fields from mapFunction will assign to key, value of reduce function
+
+
+var mapFun = function() { emit(this.address, 1) };
+var redFun = function(key, val) { return Array.sum(val) };
+db.users.mapReduce(mapFun, redFun, { "out" : "output" });
+db.output.find();
+
+
+emitted fields
+~~~~~~~~~~~~~~~~~
+key 	| val	|
+-----------------
+mumbai	| 	1	|
+mumbai	| 	1	|
+nagpur	| 	1	|
+pune	| 	1	|
+-----------------
+mumbai = [1, 1];
+
+final output:-
+~~~~~~~~~~~~~
+{
+	"mumbai" : 2,
+	"nagpur" : 1,
+	"pune"	 : 1
+}
+
+var mapFun = function() {emit(this.address, this.salary)};
+var redFun = function(key, val) { return Array.sum(val) };
+db.users.mapReduce(mapFun, redFun, { "out" : "output" });
+db.output.find();
+
+=====================
+
+> db.users.mapReduce(function() { emit(this.address, this.salary)}, (k,v) => Array.avg(v), {"out" : "test"});
+{ "result" : "test", "ok" : 1 }
+> db.test.find();
+{ "_id" : "bangalore", "value" : { "code" : "(k,v) => Array.avg(v)" } }
+{ "_id" : "baroda", "value" : { "code" : "(k,v) => Array.avg(v)" } }
+{ "_id" : "delhi", "value" : { "code" : "(k,v) => Array.avg(v)" } }
+{ "_id" : "bhopal", "value" : { "code" : "(k,v) => Array.avg(v)" } }
+{ "_id" : "ahmedabad", "value" : { "code" : "(k,v) => Array.avg(v)" } }
+{ "_id" : "mumbai", "value" : { "code" : "(k,v) => Array.avg(v)" } }
+{ "_id" : "thane", "value" : { "code" : "(k,v) => Array.avg(v)" } }
+>
+
+=======================
+
+
+show collections;
+db.output.drop();
+
+=====================
+	THANK YOU
+=====================

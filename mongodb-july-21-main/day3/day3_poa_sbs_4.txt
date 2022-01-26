@@ -1,0 +1,57 @@
+---------------------------------------
+HOW TO READ RAW JSON DATA IN express.js
+---------------------------------------
+FILE: index.js 
+
+var express = require("express");
+var app = express();
+const port = 8088;
+
+//to parse raw json use express.json() middleware
+app.use(express.json());
+
+app.post("/user", (req, res) => {
+
+	console.log(req.body);
+	res.send(req.body);
+});
+
+app.listen(port, () => console.log(`Listening on port ${port}`));
+
+---------END OF index.js FILE----------
+
+
+============================================
+TO CALL THIS FROM POSTMAN HIT URL
+http://localhost/8088/user/
+
+AND SELECT BODY RAW json
+{
+	"name" : "shailesh",
+	"age" : 32,
+	"city" : "nagpur"
+}
+============================================
+
+Class work multiply 2 numbers using raw json
+Ans:-
+app.route("/mul")
+.post((req, res) => {
+	//read form data
+	console.log(req.body);
+	x = req.body.num1;
+	y = req.body.num2;
+	z = x * y;
+	res.send({"result" : z});
+});
+
+HIT THIS API FROM POST MAN
+http://localhost:8088/mul
+
+INPUT FROM POSTMAN
+{
+	"num1" : 5,
+	"num2" : 6
+}
+
+NOTE: Select POST METHOD and body RAW json

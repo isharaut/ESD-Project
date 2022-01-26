@@ -1,0 +1,101 @@
+db.employees.find({where}, {projection}).pretty();
+
+db.employees.find({"salary" : {"$gt" : 50000}}).pretty();
+
+db.employees.find({}, {"name" : 1, "address" : 1, "salary" : 1});
+SELECT id, name, address, salary FROM employees;
+
+db.employees.find({}, {"_id": 0, "name" : 1, "address" : 1, "salary" : 1});
+SELECT name, address, salary FROM employees;
+
+
+db.employees.find({"name" : /i/}, {"_id": 0, "name" : 1});
+SELECT name FROM employees WHERE name LIKE '%i%';
+
+To find girls name
+db.employees.find({"name" : /[aeiou]$/}, {"_id": 0, "name" : 1});
+
+To find boys name
+db.employees.find({"name" : /[^aeiou]$/}, {"_id": 0, "name" : 1});
+
+=========LIMIT and Offset==========
+db.employees.find({}, {"_id": 0, "name" : 1});
+db.employees.find({}, {"_id": 0, "name" : 1}).limit(3);
+db.employees.find({}, {"_id": 0, "name" : 1}).skip(3).limit(3);
+
+============ORDER BY =================
+Asc
+db.employees.find({}, {"_id": 0, "name" : 1, "salary" : 1}).sort({"salary": 1});
+
+Desc
+db.employees.find({}, {"_id": 0, "name" : 1, "salary" : 1}).sort({"salary": -1});
+
+-----------------------
+
+create collection
+db.createCollection("students");
+
+-----------------------
+
+create json object
+rec = {"name" : "Harprasad"}
+
+insert document (json object)
+db.students.insertOne(rec);
+Similar to 
+INSERT INTO students (name) VALUES ("Shailesh");
+
+to check inserted document
+db.students.find()
+SELECT * FROM students;
+
+
+insert many document at once
+recs = [{"name":"Bagde"}, {"name":"Kd"}];
+db.students.insertMany(recs);
+INSERT INTO students (name) VALUES ("Bagde"), ("Kd");
+
+-----------------------
+
+where clause
+db.students.find({"name":"Shailesh"});
+SELECT * FROM students WHERE name = "Shailesh";
+
+db.students.find({"name":/Shail/});
+SELECT * FROM students WHERE name LIKE "%Shailesh%";
+
+db.students.find({"name":/^Shail/});
+SELECT * FROM students WHERE name LIKE "Shailesh%";
+
+db.students.find({"name":/Shail$/});
+SELECT * FROM students WHERE name LIKE "Shailesh%";
+
+here we are using regex pattern of javascript
+
+-----------------------
+show specific fields
+db.students.find({}, {"_id":1})
+SELECT id FROM students;
+
+db.students.find({}, {"_id":0})
+SELECT * FROM students;
+
+db.students.find({}, {"name":1})
+SELECT id, name FROM students;
+
+===============================
+
+
+
+
+
+function funcName(x, y) { //function heading
+	function body
+}
+
+funcName(5,6);
+
+x,y => parameters
+5,6 => arguments
+
+

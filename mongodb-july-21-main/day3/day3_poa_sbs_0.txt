@@ -1,0 +1,18 @@
+AGENDA
+------
+Node.js
+Node.js Module
+Express.js
+Mongoose Module
+CRUD Operation using Node.js
+
+=============================
+IF YOU FACE ANY ISSUE LIKE 
+
+Error: Cannot find module 'module_name'
+
+THEN RUN FOLLOWING COMMAND
+npm install <module_name>
+	OR
+npm i <module_name>
+=============================

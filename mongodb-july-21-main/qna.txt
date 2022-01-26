@@ -1,0 +1,104 @@
+What is MongoDB
+1. SQL Database
+2. NoSQL Database (Correct)
+3. JSON
+4. Programming Language
+
+
+What is Document
+1. Document is similar to table
+2. Document is similar to row (Correct)
+3. Document if similar to column
+4. None of the above
+
+What is the difference between JSON and BSON
+Ans. JSON is javascript object where BSON is mongodb document
+
+Which function is used to show all documents from collection
+1. search()
+2. filter()
+3. find() (Correct)
+4. fetch()
+
+What is the correct syntax to sort documents
+1. db.collection.find().sort({"field": true})
+2. db.collection.find().sort({"field": 1})
+3. db.collection.find().sort({"field": false})
+4. db.collection.find().sort({"field": -1})
+Correct: 2 and 4
+
+What is projection and what is the syntax
+Projection is showing specific fields from collection
+Syntax:- db.collection.find({}, {"field1" : 1, "field2" : 0})
+
+How to show only first 5 documents from collection
+Answer: db.collection.find().limit(5)
+
+How to display all documents from users collection whose city is Mumbai
+Answer: db.users.find({"city" : "Mumbai"});
+
+What is mapReduce function and what is it's syntax
+Answer: Map-reduce is a data processing paradigm for condensing large volumes of data into useful aggregated results
+Syntax:-
+db.collection.mapReduce(map_function, reduce_function, output)
+
+What is the correct syntax to insert multiple documents in collections
+1. db.collection.insert()
+2. db.collection.insertOne()
+3. db.collection.insertMany() (Correct)
+4. db.collection.insertMultiple()
+
+Tell me any 5 operators used in MongoDB
+1. $and
+2. $or
+3. $lt
+4. $gt
+6. $in
+7. $nin
+8. $eq
+9. $ne
+
+What is aggregation. How to find average salary from employees collection
+Answer: Aggregation operations group values from multiple documents together, and can perform a variety of operations on the grouped data to return a single result.
+
+To find average Salary:
+db.employees.aggregate([{
+	$group : {
+		"_id" : "anyid",
+		"avg_salary" : { "$avg" : "$salary" }
+	}
+}]);
+
+
+What is CRUD Operations
+CRUD operations are Insert, Read, Update and Delete documents from database
+
+How to perform CRUD operations using node js
+Answer: We can use express framework in node js to deal with CRUD operations
+
+Which method is use to update document from node.js(express)
+Answer: put method
+You can ask other questions also for
+Insert - POST
+Read - GET
+Update - PUT
+Delete - DELETE
+
+
+What is module and How to include module in node.js
+Answer: Module is any js library which contans function, classes and objects
+To include any module you need to use require function
+e.g. requre("express")
+
+What is mongoose?
+Answer: Mongoose is a module which is used to perform database operations from node js
+
+What is Atlas?
+Answer: MongoDB Atlas is cloud provided mongo db to create cluster. Where you can create multiple databases and collection.
+MongoDB Atlas provide 512MB free space to use for single users
+
+
+What is REST Api
+Answer: REST API is a set of rules that define how applications or devices can connect to and communicate with each other. 
+The most common format used in REST API is JSON
+Full form of rest is Representational State Transfer
